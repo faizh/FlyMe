@@ -20,3 +20,5 @@ Route::get('/contact','WebController@contact');
 Route::get('/login','AuthController@login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout','AuthController@logout');
+
+Route::post('/search','BookingController@search');
