@@ -30,4 +30,6 @@ class WebController extends Controller
     {
     	return view('web.contact',['active'=>'contact']);
     }
+
+    
 }

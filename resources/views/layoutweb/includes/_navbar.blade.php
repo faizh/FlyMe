@@ -51,11 +51,17 @@
 					        @else
 					          	<li><a href="/contact">Contact</a></li>
 					        @endif
-					        @if($active=='login')
-						        <li><a href="#" class="menu-active">Login</a></li>
+					        @if(Auth::check())
+					          	<li><a href="/logout">Logout</a></li>
+					          	<li style="color: #f8b600">{{auth()->user()->name}}</li>
 					        @else
-					          <li><a href="#">Login</a></li>
-					        @endif
+						        @if($active=='login')
+								        <li><a href="/login" class="menu-active">Login</a></li>
+							        @else
+							          <li><a href="/login">Login</a></li>
+							    @endif
+							@endif
+					        
 				        </ul>
 				      </nav><!-- #nav-menu-container -->					      		  
 					</div>
