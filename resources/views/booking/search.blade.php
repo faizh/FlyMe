@@ -8,7 +8,7 @@
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								Choose Your Flight
+								Choose Your Airplane
 							</h1>	
 							<p class="text-white link-nav"><a href="index.html">{{$asal}} </a>  <span class="lnr lnr-arrow-right"></span>  <a href="about.html"> {{$tujuan}}</a></p>
 						</div>	
@@ -40,8 +40,12 @@
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Price per person</span>
-											<a href="#" class="price-btn">IDR {{$d->harga}}</a>
+											<span class="price-btn">IDR {{$d->harga}}</span>
 										</li>													
+										<li class="d-flex justify-content-between align-items-center">
+											<span></span>
+											<a href="/buy/{{$d->id}}/{{$passenger}}" class="primary-btn text-uppercase">Buy</a>
+										</li>
 									</ul>
 								</div>
 							</div>

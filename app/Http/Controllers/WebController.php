@@ -8,8 +8,10 @@ class WebController extends Controller
 {
     public function index()
     {
-        $rute = \App\Rute::all();
-    	return view('web.index',['active'=>'home','rute'=>$rute]);
+        $rute = \App\Rute::distinct()->get();
+        $asal = \App\Rute::distinct()->get('asal');
+        $tujuan = \App\Rute::distinct()->get('tujuan');
+    	return view('web.index',['active'=>'home','rute'=>$rute,'asal'=>$asal,'tujuan'=>$tujuan]);
     }
 
     public function about()

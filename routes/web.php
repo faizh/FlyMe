@@ -22,3 +22,5 @@ Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout','AuthController@logout');
 
 Route::post('/search','BookingController@search');
+Route::get('/buy/{id}/{pasenger}','BookingController@buy');
+Route::get('/confirmplane/{id}/{passenger}','BookingController@confirmplane');

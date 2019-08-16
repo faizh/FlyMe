@@ -21,19 +21,18 @@
 									{{csrf_field()}}
 									<select class="form-control" name="departure">
 										<option>- Departure -</option>
-										@foreach($rute as $r)
-										<option value="{{$r->asal}}">{{$r->asal}}</option>
+										@foreach($asal as $a)
+										<option value="{{$a->asal}}">{{$a->asal}}</option>
 										@endforeach
 									</select>									
 									<select class="form-control" name="arrival">
 										<option>- Arrival -</option>
-										@foreach($rute as $r)
-										<option value="{{$r->tujuan}}">{{$r->tujuan}}</option>
+										@foreach($tujuan as $t)
+										<option value="{{$t->tujuan}}">{{$t->tujuan}}</option>
 										@endforeach
 									</select>
-									<input type="text" class="form-control date-picker" name="date" placeholder="Date " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Date '" id="from-datepicker">
-									<input type="number" min="1" max="20" class="form-control" name="adults" placeholder="Adults " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Adults '">
-									<input type="number" min="1" max="20" class="form-control" name="child" placeholder="Child " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Child '">							
+									<input type="text" class="form-control date-picker" name="date" placeholder="Date " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Date '" id="from-datepicker" required="required">
+									<input type="number" min="1" max="20" class="form-control" name="passenger" placeholder="Passenger " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passenger '" required="required">
 									<button type="submit" class="primary-btn text-uppercase">Search flights</button>
 																
 								</form>
