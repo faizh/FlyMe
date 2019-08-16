@@ -46,6 +46,7 @@ class BookingController extends Controller
         $customer->telepon = $request->phone;
         $customer->save();
 
+        $forseat=array();
         for ($i=1; $i <= $passenger ; $i++) { 
             $reservation = new Reservation;
             $title = "title".$i;
@@ -57,12 +58,16 @@ class BookingController extends Controller
             $reservation->nama = $request->$name;
             $reservation->no_identitas = $request->$idcard;
             $reservation->save();
+            $forseat[$i-1]=Reservation::find($reservation->id);
+            
         }
-
-        return redirect('/passenger/'.$id.'/'.$passenger)->with(['passenger'=>'true'],['customer_id'=>$customer->id]);
+        $data = Rute::find($id);
+        return view('booking.seat',['active'=>'home','data'=>$data,'passenger'=>$passenger,'passenger_seat'=>$forseat]);
     }
-    public function passengerinfo($id,$passenger, Request $request)
+
+    public function seat($id,$passenger)
     {
-        dd($request);
+        $data = Rute::find($id);
+        return view('booking.seat',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
     }
 }

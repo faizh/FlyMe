@@ -26,4 +26,4 @@ Route::get('/buy/{id}/{pasenger}','BookingController@buy');
 Route::get('/confirmplane/{id}/{passenger}','BookingController@confirmplane');
 Route::get('/passenger/{id}/{passenger}','BookingController@passenger');
 Route::post('/contactinfo/{id}/{passenger}','BookingController@contactinfo');
-Route::post('/passengerinfo/{id}/{passenger}','BookingController@customerinfo');
+Route::get('/seat/{id}/{passenger}','BookingController@seat');
