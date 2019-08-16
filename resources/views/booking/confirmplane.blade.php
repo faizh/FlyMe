@@ -25,6 +25,7 @@
 							<div class="single-destinations">
 								<div class="details">
 									<h4>{{$data->maskapai}}</h4>
+									<h5>{{$data->asal}} <span class="lnr lnr-arrow-right"></span> {{$data->tujuan}}</h5>
 									<ul class="package-list">
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Date</span>
@@ -37,6 +38,16 @@
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Arrival</span>
 											<span>{{$data->tiba}}</span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											@php
+											$tiba = strtotime($data->tiba);
+											$berangkat = strtotime($data->berangkat);
+											$tduration =  $tiba-$berangkat;
+											$duration = date('H:i:s', $tduration)
+											@endphp
+											<span>Duration</span>
+											<span>{{$duration}}</span>
 										</li>
 									</ul>
 								</div>
@@ -69,7 +80,7 @@
 											</li>													
 											<li class="d-flex justify-content-between align-items-center">
 												<span></span>
-												<a href="/buy/{{$data->id}}" class="primary-btn text-uppercase">Buy</a>
+												<a href="/passenger/{{$data->id}}/{{$passenger}}" class="primary-btn text-uppercase">Buy</a>
 											</li>
 										</ul>
 									</div>
