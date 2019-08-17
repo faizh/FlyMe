@@ -28,3 +28,4 @@ Route::get('/passenger/{id}/{passenger}','BookingController@passenger');
 Route::post('/contactinfo/{id}/{passenger}','BookingController@contactinfo');
 Route::get('/seat/{id}/{passenger}','BookingController@seat');
 Route::post('/seat/{id}/{passenger}/book','BookingController@bookseat');
+Route::post('/payment','BookingController@payment');

@@ -88,6 +88,16 @@ class BookingController extends Controller
         foreach ($reservation as $r) {
             $data_rute = Rute::where('id',$r->rute_id)->get()->first();
         }
-        return view('booking.payment',['active'=>'home','data'=>$data_rute,'reservation'=>$reservation]);
+        return view('booking.payment',['active'=>'home','data'=>$data_rute,'reservation'=>$reservation,'customer_id'=>$request->customer_id]);
+    }
+
+    public function payment(Request $request)
+    {
+        $customer = Customer::find($request->customer_id);
+        $request->file('proof')->move('images/',$request->file('proof')->getClientOriginalName());
+        $customer->bukti_transfer = $request->file('proof')->getClientOriginalName();
+        $customer->save();
+
+        dd($customer);
     }
 }
