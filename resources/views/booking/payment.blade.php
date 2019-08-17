@@ -27,7 +27,7 @@
 										<h4>Booking</h4>
 										<ul class="package-list">
 											<li class="d-flex justify-content-between align-items-center">
-												<span>Your Reservation Code</span>
+												<span style="text-align: center;">Your Reservation Code <span class="price-btn">{{$reservation_data->reservation_code}}</span></span>
 											</li>
 										</ul>
 									</div>
@@ -40,7 +40,7 @@
 							$i=0;
 							@endphp
 
-							@foreach($reservation as $r)
+							@foreach($passenger as $p)
 							
 							@php
 							$i++
@@ -52,15 +52,15 @@
 										<ul class="package-list">
 											<li class="d-flex justify-content-between align-items-center">
 												<span>Name</span>
-												<span>{{$r->title}} {{$r->nama}}</span>
+												<span>{{$p->title}} {{$p->nama}}</span>
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												<span>ID Card Number</span>
-												<span>{{$r->no_identitas}}</span>
+												<span>{{$p->no_identitas}}</span>
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												<span>Seat Number</span>
-												<span>{{$r->no_kursi}}</span>
+												<span>{{$p->no_kursi}}</span>
 											</li>
 										</ul>
 									</div>
@@ -129,12 +129,12 @@
 												</li>
 												<li class="d-flex justify-content-between align-items-center">
 													<span>Passenger</span>
-													<span>{{$reservation->count()}}</span>
+													<span>{{$passenger->count()}}</span>
 												</li>
 												<li class="d-flex justify-content-between align-items-center">
 													<span>Total Price</span>
 													@php
-													$total_price = $reservation->count() * $data->harga;
+													$total_price = $passenger->count() * $data->harga;
 													@endphp
 													<span class="price-btn">IDR {{$total_price}}</span>
 												</li>

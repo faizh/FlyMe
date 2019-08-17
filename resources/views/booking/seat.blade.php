@@ -26,12 +26,12 @@
 								<div class="single-destinations">
 									<div class="details">
 										<h4 style="margin-bottom: 20px">Contact Person Details</h4>
-										<form action="/seat/{{$data->id}}/{{$passenger}}/book" method="POST">
+										<form action="/seat/{{$data->id}}/{{$jumlah}}/book" method="POST">
 											{{csrf_field()}}
 										<table class="customer-table">
 
 											<?php $i = 0; ?>
-											@foreach($passenger_seat as $p)
+											@foreach($jumlah_seat as $p)
 											<?php $i++; ?>
 											<tr>
 												<td>
@@ -43,7 +43,7 @@
 												<td>
 													<input name="seat{{$i}}" class="form-control" id="i<?php echo $i ?>" type="text">
 													<input type="hidden" name="customer_id" value="{{$customer_id}}">
-													<input type="hidden" name="reservation_id{{$i}}" value="{{$p->id}}">
+													<input type="hidden" name="passenger_id{{$i}}" value="{{$p->id}}">
 												</td>
 											</tr>
 
@@ -73,7 +73,7 @@
 											<?php endfor; ?>
 										</div>
 										<div class="row" style="margin-top: 30px;">	
-										<div class="col-lg-12" @if($i==$passenger) style="display: none;" @endif>
+										<div class="col-lg-12" @if($i==$jumlah) style="display: none;" @endif>
 											<div class="alert-msg" style="text-align: left;"></div>
 											<button type="submit" class="genric-btn primary" style="float: right;" >Next</button>	
 											</div>
@@ -120,7 +120,7 @@
 											<li class="d-flex justify-content-between align-items-center">
 												@php
 												$harga = (int)$data->harga;
-												$total = $harga*$passenger;
+												$total = $harga*$jumlah;
 												@endphp
 												<span>Total Price</span>
 												<span class="price-btn">IDR {{$total}}</span>

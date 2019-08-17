@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Rute;
 use \App\Customer;
+use \App\Passenger;
 use \App\Reservation;
 use Auth;
 
@@ -37,7 +38,7 @@ class BookingController extends Controller
         return view('booking.passengerinfo',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
     }
 
-    public function contactinfo($id,$passenger, Request $request)
+    public function contactinfo($id,$jumlah, Request $request)
     {
         $customer = new Customer;
         $customer->user_id = Auth::user()->id;
@@ -47,23 +48,23 @@ class BookingController extends Controller
         $customer->save();
 
         $forseat=array();
-        for ($i=1; $i <= $passenger ; $i++) { 
-            $reservation = new Reservation;
+        for ($i=1; $i <= $jumlah ; $i++) { 
+            $passenger = new Passenger;
             $title = "title".$i;
             $name = "name".$i;
             $idcard = "idcard".$i;
-            $reservation->user_id = Auth::user()->id;
-            $reservation->customer_id = $customer->id;
-            $reservation->title = $request->$title;
-            $reservation->nama = $request->$name;
-            $reservation->no_identitas = $request->$idcard;
-            $reservation->status = '0';
-            $reservation->save();
-            $forseat[$i-1]=Reservation::find($reservation->id);
+            $passenger->user_id = Auth::user()->id;
+            $passenger->customer_id = $customer->id;
+            $passenger->title = $request->$title;
+            $passenger->nama = $request->$name;
+            $passenger->no_identitas = $request->$idcard;
+            $passenger->status = '0';
+            $passenger->save();
+            $forseat[$i-1]=Passenger::find($passenger->id);
             
         }
         $data = Rute::find($id);
-        return view('booking.seat',['active'=>'home','data'=>$data,'passenger'=>$passenger,'passenger_seat'=>$forseat,'customer_id'=>$customer->id]);
+        return view('booking.seat',['active'=>'home','data'=>$data,'jumlah'=>$jumlah,'jumlah_seat'=>$forseat,'customer_id'=>$customer->id]);
     }
 
     public function seat($id,$passenger)
@@ -72,23 +73,30 @@ class BookingController extends Controller
         return view('booking.seat',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
     }
 
-    public function bookseat($id,$passenger,Request $request)
+    public function bookseat($id,$jumlah,Request $request)
     {
-        for ($i=1; $i <=$passenger ; $i++) { 
-            $reservation_id = "reservation_id".$i;
+        for ($i=1; $i <=$jumlah ; $i++) { 
+            $passenger_id = "passenger_id".$i;
             $seat_code = "seat".$i;
-            $reservation = Reservation::find($request->$reservation_id);
-            $reservation->rute_id=$id;
-            $reservation->update(array('no_kursi' => $request->$seat_code));
-            $reservation->save();
+            $passenger = Passenger::find($request->$passenger_id);
+            $passenger->rute_id=$id;
+            $passenger->update(array('no_kursi' => $request->$seat_code));
+            $passenger->save();
         }
-        
+
+        $reservation = new Reservation;
+        $reservation->user_id = Auth::user()->id;
+        $reservation->customer_id = $request->customer_id;
+        $reservation->reservation_code = "FlyMe-".str_random('5');
+        $reservation->save();
+
         $customer = Customer::find($request->customer_id);
-        $reservation = Reservation::where('customer_id',$customer->id)->get();
-        foreach ($reservation as $r) {
+        $reservation_data = Reservation::find($reservation->id);
+        $passenger = Passenger::where('customer_id',$customer->id)->get();
+        foreach ($passenger as $r) {
             $data_rute = Rute::where('id',$r->rute_id)->get()->first();
         }
-        return view('booking.payment',['active'=>'home','data'=>$data_rute,'reservation'=>$reservation,'customer_id'=>$request->customer_id]);
+        return view('booking.payment',['active'=>'home','data'=>$data_rute,'passenger'=>$passenger,'customer_id'=>$request->customer_id,'reservation_data'=>$reservation_data]);
     }
 
     public function payment(Request $request)
@@ -97,7 +105,11 @@ class BookingController extends Controller
         $request->file('proof')->move('images/',$request->file('proof')->getClientOriginalName());
         $customer->bukti_transfer = $request->file('proof')->getClientOriginalName();
         $customer->save();
+        $passenger = Passenger::where('customer_id',$customer->id)->get();
+        foreach ($passenger as $r) {
+            $data_rute = Rute::where('id',$r->rute_id)->get()->first();
+        }
 
-        dd($customer);
+        return view('booking.complete',['active'=>'home','data'=>$data_rute]);
     }
 }
