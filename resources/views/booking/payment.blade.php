@@ -20,13 +20,69 @@
 			<section class="destinations-area section-gap">
 				<div class="container">
 					<div class="row">
+
+						<div class="col-lg-12">
+							<div class="single-destinations">
+								<div class="details">
+									<h4>Booking</h4>
+									<ul class="package-list">
+										<li class="d-flex justify-content-between align-items-center">
+											<span>Your Reservation Code</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 						
+						@php
+						$i=0;
+						@endphp
+
+						@foreach($reservation as $r)
+						
+						@php
+						$i++
+						@endphp
 						<div class="col-lg-8">
 							<div class="single-destinations">
 								<div class="details">
-									<h4>{{$data->maskapai}}</h4>
-									<h5>{{$data->asal}} <span class="lnr lnr-arrow-right"></span> {{$data->tujuan}}</h5>
+									<h4>Passenger {{$i}}</h4>
 									<ul class="package-list">
+										<li class="d-flex justify-content-between align-items-center">
+											<span>Name</span>
+											<span>{{$r->title}} {{$r->nama}}</span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											<span>ID Card Number</span>
+											<span>{{$r->no_identitas}}</span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											<span>Seat Number</span>
+											<span>{{$r->no_kursi}}</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>	
+						@endforeach
+
+						<div class="col-lg-4">
+							<div class="single-destinations">
+								<div class="details">
+									<h4>Flight Details</h4>
+									<ul class="package-list">
+										<li class="d-flex justify-content-between align-items-center">
+											<span>Airplane</span>
+											<span>{{$data->maskapai}}</span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											<span>From</span>
+											<span>{{$data->asal}}</span>
+										</li>
+										<li class="d-flex justify-content-between align-items-center">
+											<span>To</span>
+											<span>{{$data->tujuan}}</span>
+										</li>
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Date</span>
 											<span>{{$data->tanggal}}</span>
@@ -53,6 +109,9 @@
 								</div>
 							</div>
 						</div>	
+
+						<div class="col-lg-8"></div>
+
 						<div class="col-lg-4">
 								<div class="single-destinations">
 									<div class="details">
@@ -64,23 +123,20 @@
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												<span>Passenger</span>
-												<span>{{$passenger}}</span>
+												<span>{{$reservation->count()}}</span>
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												<span>Total Price</span>
-												<span>{{$passenger}} x {{$data->harga}}</span>
+												
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
-												@php
-												$harga = (int)$data->harga;
-												$total = $harga*$passenger;
-												@endphp
+												
 												<span></span>
-												<span class="price-btn">IDR {{$total}}</span>
+												
 											</li>													
 											<li class="d-flex justify-content-between align-items-center">
 												<span></span>
-												<a href="/passenger/{{$data->id}}/{{$passenger}}" class="primary-btn text-uppercase">Confirm</a>
+												<a href="/passenger/{{$data->id}}" class="primary-btn text-uppercase">Confirm</a>
 											</li>
 										</ul>
 									</div>

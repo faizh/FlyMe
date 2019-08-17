@@ -26,14 +26,13 @@
 								<div class="single-destinations">
 									<div class="details">
 										<h4 style="margin-bottom: 20px">Contact Person Details</h4>
-										<form action="/booking/proccess" method="POST">
+										<form action="/seat/{{$data->id}}/{{$passenger}}/book" method="POST">
+											{{csrf_field()}}
 										<table class="customer-table">
 
 											<?php $i = 0; ?>
-											
 											@foreach($passenger_seat as $p)
 											<?php $i++; ?>
-
 											<tr>
 												<td>
 													<div onclick="pget(this.id)" id="p<?php echo $i ?>" class="customer-color id-p<?php echo $i ?>"></div>
@@ -42,7 +41,9 @@
 													<span>{{$p->nama}}</span>
 												</td>
 												<td>
-													<input name="seat" class="form-control" id="i<?php echo $i ?>" type="text">
+													<input name="seat{{$i}}" class="form-control" id="i<?php echo $i ?>" type="text">
+													<input type="hidden" name="customer_id" value="{{$customer_id}}">
+													<input type="hidden" name="reservation_id{{$i}}" value="{{$p->id}}">
 												</td>
 											</tr>
 
