@@ -17,6 +17,9 @@ Route::get('/packages','WebController@packages');
 Route::get('/insurance','WebController@insurance');
 Route::get('/contact','WebController@contact');
 
+Route::get('/signup','UserController@signup');
+Route::post('/postsignup','UserController@postsignup');
+
 Route::get('/login','AuthController@login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout','AuthController@logout');

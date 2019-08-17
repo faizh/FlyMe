@@ -17,14 +17,14 @@
 						<div class="col-lg-5 col-md-6 banner-right">
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-								<form class="form-wrap" action="/postlogin" method="POST" >
+								<form class="form-wrap" action="/postsignup" method="POST" >
 									{{csrf_field()}}
-									<h3 style="margin-bottom: 20px">Login Here</h3>
+									<h3 style="margin-bottom: 20px">Sign Up Here</h3>
+									<input type="text" name="name" placeholder="Name" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name '">
 									<input type="email" min="1" max="20" class="form-control" name="email" placeholder="Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email '">
-									<input type="password" min="1" max="20" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">
-									<button type="submit" class="primary-btnlogin text-uppercase" style="margin-top: 10px">Login</button>
+									<input type="text" min="1" max="20" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">
+									<button type="submit" class="primary-btnlogin text-uppercase" style="margin-top: 10px">Sign Up</button>
 									<br></br>
-									<span><a href="/signup">Sign Up Here</a></span>
 								</form>
 							  </div>
 							</div>
