@@ -157,8 +157,8 @@
 													<span><h6>Upload your proof of payment</h6></span>
 												</li>
 												<li class="d-flex justify-content-between align-items-center">
-													<span>
-														<img src="{{$reservation_data->getProof()}}">
+													<span class="img-proof">
+														<img src="{{$reservation_data->getProof()}}" style="width: 200px">
 													</span>
 												</li>
 												<li class="d-flex justify-content-between align-items-center">
