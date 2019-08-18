@@ -18,12 +18,11 @@ class BookingController extends Controller
     	return view('booking.search',['active'=>'home','asal'=>$request->departure,'tujuan'=>$request->arrival,'data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
     }
 
-    public function buy(Request $request)
+    public function choose(Request $request)
     {
     	if(Auth::check()){
             $data = Rute::find($request->rute_id);
             return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
-	    	// return redirect('/confirmplane/'.$id.'/'.$passenger);
     	}
     	return redirect('/login')->with('error','Login First');
     }
@@ -113,5 +112,12 @@ class BookingController extends Controller
         }
 
         return view('booking.complete',['active'=>'home','data'=>$data_rute]);
+    }
+
+    public function yourbooking()
+    {
+        $user_id = Auth::user()->id;
+        $data = Reservation::where('user_id',$user_id)->get();
+        return view('booking.yourbooking',['active'=>'yourbooking','data'=>$data]);
     }
 }

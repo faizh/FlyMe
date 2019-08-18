@@ -52,6 +52,10 @@
 					          	<li><a href="/contact">Contact</a></li>
 					        @endif
 					        @if(Auth::check())
+					        	@if($active=='yourbooking')
+							        <li><a href="/yourbooking" class="menu-active">Your Booking</a></li>
+						        @endif
+						        <li><a href="/yourbooking">Your Booking</a></li>
 					          	<li><a href="/logout">Logout</a></li>
 					          	<li style="color: #f8b600">{{auth()->user()->name}}</li>
 					        @else

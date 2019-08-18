@@ -24,10 +24,11 @@ Route::get('/login','AuthController@login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout','AuthController@logout');
 
+Route::get('/yourbooking','BookingController@yourbooking');
 Route::post('/booking/search','BookingController@search');
-Route::post('booking/choose','BookingController@buy');
+Route::post('/booking/choose','BookingController@choose');
 Route::post('/booking/passenger','BookingController@passenger');
-Route::post('booking/seat','BookingController@seat');
+Route::post('/booking/seat','BookingController@seat');
 // Route::get('/seat/{id}/{passenger}','BookingController@seat');
 Route::post('/booking/payment','BookingController@payment');
 Route::post('/booking/complete','BookingController@complete');
