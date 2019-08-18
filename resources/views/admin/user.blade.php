@@ -21,7 +21,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title">User Data</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -40,7 +40,7 @@
                   <td>{{$u->name}}</td>
                   <td>{{$u->email}}</td>
                   <td>{{$u->created_at}}</td>
-                  <td>Edit | Delete</td>
+                  <td><a href="/admin/user/edit/{{$u->id}}">Edit</a> | <a href="/admin/user/delete/{{$u->id}}">Delete</a></td>
                 </tr>
                 @endforeach
                 </tbody>

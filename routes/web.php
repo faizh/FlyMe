@@ -37,3 +37,6 @@ Route::post('/bookinginfo','BookingController@check');
 
 Route::get('/admin','AdminController@index');
 Route::get('/admin/user','AdminController@user');
+Route::get('/admin/user/edit/{id}','AdminController@edit');
+Route::post('/admin/user/update','AdminController@update');
+Route::get('/admin/user/delete/{id}','AdminController@delete');
