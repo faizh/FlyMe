@@ -17,7 +17,7 @@
 						<div class="col-lg-4 col-md-6 banner-right">
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-								<form class="form-wrap" action="/search" method="POST">
+								<form class="form-wrap" action="/booking/search" method="POST">
 									{{csrf_field()}}
 									<select class="form-control" name="departure">
 										<option>- Departure -</option>
@@ -32,7 +32,7 @@
 										@endforeach
 									</select>
 									<input type="text" class="form-control date-picker" name="date" placeholder="Date " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Date '" id="from-datepicker" required="required">
-									<input type="number" min="1" max="20" class="form-control" name="passenger" placeholder="Passenger " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passenger '" required="required">
+									<input type="number" min="1" max="20" class="form-control" name="passenger_quantity" placeholder="Passenger " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Passenger '" required="required">
 									<button type="submit" class="primary-btn text-uppercase">Search flights</button>
 																
 								</form>

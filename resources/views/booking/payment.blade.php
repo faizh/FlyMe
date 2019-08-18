@@ -158,7 +158,7 @@
 												</li>
 												<li class="d-flex justify-content-between align-items-center">
 													<span>
-														<form action="/payment" method="POST" enctype="multipart/form-data">
+														<form action="/booking/complete" method="POST" enctype="multipart/form-data">
 															{{csrf_field()}}
 															<input type="file" name="proof">
 															<input type="hidden" name="customer_id" value="{{$customer_id}}">

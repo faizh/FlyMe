@@ -64,23 +64,28 @@
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												<span>Passenger</span>
-												<span>{{$passenger}}</span>
+												<span>{{$passenger_quantity}}</span>
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												<span>Total Price</span>
-												<span>{{$passenger}} x {{$data->harga}}</span>
+												<span>{{$passenger_quantity}} x {{$data->harga}}</span>
 											</li>
 											<li class="d-flex justify-content-between align-items-center">
 												@php
 												$harga = (int)$data->harga;
-												$total = $harga*$passenger;
+												$total = $harga*$passenger_quantity;
 												@endphp
 												<span></span>
 												<span class="price-btn">IDR {{$total}}</span>
 											</li>													
 											<li class="d-flex justify-content-between align-items-center">
 												<span></span>
-												<a href="/passenger/{{$data->id}}/{{$passenger}}" class="primary-btn text-uppercase">Confirm</a>
+												<form action="/booking/passenger" method="POST">
+													{{csrf_field()}}
+													<input type="hidden" name="rute_id" value="{{$data->id}}">
+													<input type="hidden" name="passenger_quantity" value="{{$passenger_quantity}}">
+													<button type="submit" class="genric-btn primary" style="float: right;" >Next</button>	
+												</form>
 											</li>
 										</ul>
 									</div>

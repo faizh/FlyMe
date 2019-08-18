@@ -44,7 +44,12 @@
 										</li>													
 										<li class="d-flex justify-content-between align-items-center">
 											<span></span>
-											<a href="/buy/{{$d->id}}/{{$passenger}}" class="primary-btn text-uppercase">Buy</a>
+											<form action="/booking/choose" method="POST">
+												{{csrf_field()}}
+												<input type="hidden" name="rute_id" value="{{$d->id}}">
+												<input type="hidden" name="passenger_quantity" value="{{$passenger_quantity}}">
+												<button type="submit" class="genric-btn primary" style="float: right;" >Next</button>	
+											</form>
 										</li>
 									</ul>
 								</div>

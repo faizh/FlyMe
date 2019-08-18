@@ -26,7 +26,7 @@
 								<div class="single-destinations">
 									<div class="details">
 										<h4 style="margin-bottom: 20px">Contact Person Details</h4>
-										<form class="form-area contact-form text-right" action="/contactinfo/{{$data->id}}/{{$passenger}}" method="post"> 
+										<form class="form-area contact-form text-right" action="/booking/seat" method="POST"> 
 											{{csrf_field()}}
 										<div class="row">	
 											<div class="col-lg-12 form-group">
@@ -46,7 +46,7 @@
 									</div>
 								</div>
 								
-								@for($i=1;$i<=$passenger;$i++)
+								@for($i=1;$i<=$passenger_quantity;$i++)
 								<div class="single-destinations">
 									<div class="details">
 										<h4 style="margin-bottom: 20px">Passenger Details</h4>
@@ -74,14 +74,16 @@
 								@endfor
 
 								<div class="row" style="margin-top: 30px;">	
-									<div class="col-lg-12" @if($i==$passenger) style="display: none;" @endif>
+									<div class="col-lg-12" @if($i==$passenger_quantity) style="display: none;" @endif>
 										<div class="alert-msg" style="text-align: left;"></div>
+										<input type="hidden" name="rute_id" value="{{$data->id}}">
+										<input type="hidden" name="passenger_quantity" value="{{$passenger_quantity}}">
 										<button type="submit" class="genric-btn primary" style="float: right;" >Next</button>	
 									</div>
 									</form>
 								</div>
 						</div>	
-						
+
 						<div class="col-lg-4">
 								<div class="single-destinations">
 									<div class="details">
@@ -117,7 +119,7 @@
 											<li class="d-flex justify-content-between align-items-center">
 												@php
 												$harga = (int)$data->harga;
-												$total = $harga*$passenger;
+												$total = $harga*$passenger_quantity;
 												@endphp
 												<span>Total Price</span>
 												<span class="price-btn">IDR {{$total}}</span>

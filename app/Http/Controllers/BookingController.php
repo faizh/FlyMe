@@ -15,13 +15,15 @@ class BookingController extends Controller
     {
     	$data = Rute::where('asal','LIKE',$request->departure)->where('tujuan','LIKE',$request->arrival)->where('tanggal','LIKE',$request->date)->get();
     	// dd($data);
-    	return view('booking.search',['active'=>'home','asal'=>$request->departure,'tujuan'=>$request->arrival,'data'=>$data,'passenger'=>$request->passenger]);
+    	return view('booking.search',['active'=>'home','asal'=>$request->departure,'tujuan'=>$request->arrival,'data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
     }
 
-    public function buy($id,$passenger)
+    public function buy(Request $request)
     {
     	if(Auth::check()){
-	    	return redirect('/confirmplane/'.$id.'/'.$passenger);
+            $data = Rute::find($request->rute_id);
+            return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
+	    	// return redirect('/confirmplane/'.$id.'/'.$passenger);
     	}
     	return redirect('/login')->with('error','Login First');
     }
@@ -32,13 +34,13 @@ class BookingController extends Controller
         return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
     }
 
-    public function passenger($id,$passenger)
+    public function passenger(Request $request)
     {
-        $data = Rute::find($id);
-        return view('booking.passengerinfo',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
+        $data = Rute::find($request->rute_id);
+        return view('booking.passenger',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
     }
 
-    public function contactinfo($id,$jumlah, Request $request)
+    public function seat(Request $request)
     {
         $customer = new Customer;
         $customer->user_id = Auth::user()->id;
@@ -48,7 +50,7 @@ class BookingController extends Controller
         $customer->save();
 
         $forseat=array();
-        for ($i=1; $i <= $jumlah ; $i++) { 
+        for ($i=1; $i <= $request->passenger_quantity ; $i++) { 
             $passenger = new Passenger;
             $title = "title".$i;
             $name = "name".$i;
@@ -63,23 +65,23 @@ class BookingController extends Controller
             $forseat[$i-1]=Passenger::find($passenger->id);
             
         }
-        $data = Rute::find($id);
-        return view('booking.seat',['active'=>'home','data'=>$data,'jumlah'=>$jumlah,'jumlah_seat'=>$forseat,'customer_id'=>$customer->id]);
+        $data = Rute::find($request->rute_id);
+        return view('booking.seat',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity,'jumlah_seat'=>$forseat,'customer_id'=>$customer->id]);
     }
 
-    public function seat($id,$passenger)
-    {
-        $data = Rute::find($id);
-        return view('booking.seat',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
-    }
+    // public function seat($id,$passenger)
+    // {
+    //     $data = Rute::find($id);
+    //     return view('booking.seat',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
+    // }
 
-    public function bookseat($id,$jumlah,Request $request)
+    public function payment(Request $request)
     {
-        for ($i=1; $i <=$jumlah ; $i++) { 
+        for ($i=1; $i <=$request->passenger_quantity ; $i++) { 
             $passenger_id = "passenger_id".$i;
             $seat_code = "seat".$i;
             $passenger = Passenger::find($request->$passenger_id);
-            $passenger->rute_id=$id;
+            $passenger->rute_id=$request->rute_id;
             $passenger->update(array('no_kursi' => $request->$seat_code));
             $passenger->save();
         }
@@ -99,7 +101,7 @@ class BookingController extends Controller
         return view('booking.payment',['active'=>'home','data'=>$data_rute,'passenger'=>$passenger,'customer_id'=>$request->customer_id,'reservation_data'=>$reservation_data]);
     }
 
-    public function payment(Request $request)
+    public function complete(Request $request)
     {
         $customer = Customer::find($request->customer_id);
         $request->file('proof')->move('images/',$request->file('proof')->getClientOriginalName());
