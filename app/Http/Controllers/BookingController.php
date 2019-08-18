@@ -120,4 +120,13 @@ class BookingController extends Controller
         $data = Reservation::where('user_id',$user_id)->get();
         return view('booking.yourbooking',['active'=>'yourbooking','data'=>$data]);
     }
+
+    public function check(Request $request)
+    {
+        $reservation = Reservation::find($request->reservation_id);
+        $data_rute = Rute::find($reservation->rute_id);
+        $customer = Customer::find($reservation->customer_id);
+        $passenger = Passenger::where('customer_id',$customer->id)->get();
+        return view('booking.payment',['active'=>'yourbooking','data'=>$data_rute,'passenger'=>$passenger,'customer_id'=>$customer->id,'reservation_data'=>$reservation]);
+    }
 }

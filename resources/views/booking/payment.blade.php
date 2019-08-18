@@ -158,6 +158,11 @@
 												</li>
 												<li class="d-flex justify-content-between align-items-center">
 													<span>
+														<img src="{{$reservation_data->getProof()}}">
+													</span>
+												</li>
+												<li class="d-flex justify-content-between align-items-center">
+													<span>
 														<form action="/booking/complete" method="POST" enctype="multipart/form-data">
 															{{csrf_field()}}
 															<input type="file" name="proof">

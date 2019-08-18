@@ -45,9 +45,17 @@
 											<td>{{$i}}</td>
 											<td>{{$d->reservation_code}}</td>
 											<td>{{$d->created_at}}</td>
-											<td>{{$d->updated_at}}</td>
-											<td>Status</td>
-											<td>Check</td>
+											<td>{{$d->rute($d->rute_id)}}</td>
+											@if($d->status=="0")
+												<td><span class="genric-btn danger radius">UNPAID</span></td>
+											@elseif($d->status=="1")
+												<td><span class="genric-btn success radius">PAID</span></td>
+											@endif
+											<form action="/bookinginfo" method="POST">
+												{{csrf_field()}}
+												<input type="hidden" name="reservation_id" value="{{$d->id}}">
+												<td><button type="submit" class="genric-btn info radius">Check</button></td>
+											</form>
 										</tr>
 										@endforeach
 										<tbody>	
