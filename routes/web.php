@@ -34,3 +34,6 @@ Route::post('/booking/payment','BookingController@payment');
 Route::post('/booking/complete','BookingController@complete');
 
 Route::post('/bookinginfo','BookingController@check');
+
+Route::get('/admin','AdminController@index');
+Route::get('/admin/user','AdminController@user');

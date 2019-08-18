@@ -156,11 +156,13 @@
 												<li class="d-flex justify-content-between align-items-center">
 													<span><h6>Upload your proof of payment</h6></span>
 												</li>
+												@if($reservation_data->bukti_transfer)
 												<li class="d-flex justify-content-between align-items-center">
 													<span class="img-proof">
 														<img src="{{$reservation_data->getProof()}}" style="width: 200px">
 													</span>
 												</li>
+												@endif
 												<li class="d-flex justify-content-between align-items-center">
 													<span>
 														<form action="/booking/complete" method="POST" enctype="multipart/form-data">
