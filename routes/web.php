@@ -39,6 +39,8 @@ Route::group(['middleware'=>['auth','checkLevel:0,1']],function(){
 Route::group(['middleware'=>['auth','checkLevel:1']],function(){
 	Route::get('/admin','AdminController@index');
 	Route::get('/admin/user','AdminController@user');
+	Route::get('/admin/user/create','AdminController@createuser');
+	Route::post('/admin/user/postcreate','AdminController@postcreateuser');
 	Route::get('/admin/user/edit/{id}','AdminController@edituser');
 	Route::post('/admin/user/update','AdminController@updateuser');
 	Route::get('/admin/user/delete/{id}','AdminController@deleteuser');

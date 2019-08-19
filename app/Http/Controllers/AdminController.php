@@ -21,10 +21,27 @@ class AdminController extends Controller
     	return view('admin.user',['active'=>'user','user'=>$user]);
     }
 
+    public function createuser()
+    {
+    	return view('admin.user_form',['active'=>'user','action'=>'create']);
+    }
+
+    public function postcreateuser(Request $request)
+    {
+    	$user = new User;
+    	$user->name = $request->nama;
+    	$user->email = $request->email;
+    	$user->password = bcrypt($request->password);
+    	$user->level = $request->level;
+    	$user->save();
+
+    	return redirect('/admin/user');
+    }
+
     public function edituser($id)
     {
     	$user = User::find($id);
-    	return view('admin.edit_user',['active'=>'user','user'=>$user]);
+    	return view('admin.user_form',['active'=>'user','user'=>$user,'action'=>'edit']);
     }
 
     public function updateuser(Request $request)
@@ -155,7 +172,7 @@ class AdminController extends Controller
     	$reservation = Reservation::find($id);
     	$reservation->status = "0";
     	$reservation->save();
-    	
+
     	return redirect('/admin/reservation');
     }
 }

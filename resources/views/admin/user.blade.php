@@ -26,13 +26,15 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
+              	<h5><a href="/admin/user/create" class="btn btn-primary">+ Create User</a></h5>
                 <thead>
                 <tr>
-                	<th>#</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Created At</th>
-                  <th>Action</th>
+	            	<th>#</th>
+	                <th>Name</th>
+	                <th>Email</th>
+	                <th>Created At</th>
+	                <th>Level</th>
+	                <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -48,6 +50,13 @@
                   <td>{{$u->name}}</td>
                   <td>{{$u->email}}</td>
                   <td>{{$u->created_at}}</td>
+                  <td>
+                  	@if($u->level=="0")
+                  	User
+                  	@elseif($u->level=="1")
+                  	Admin
+                  	@endif
+                  </td>
                   <td><a href="/admin/user/edit/{{$u->id}}">Edit</a> | <a href="/admin/user/delete/{{$u->id}}">Delete</a></td>
                 </tr>
                 @endforeach
