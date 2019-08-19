@@ -91,6 +91,7 @@ class BookingController extends Controller
         $reservation->customer_id = $request->customer_id;
         $reservation->rute_id = $passenger->rute_id;
         $reservation->reservation_code = "FlyMe-".str_random('5');
+        $reservation->status = "0";
         $reservation->save();
 
         $customer = Customer::find($request->customer_id);
@@ -105,13 +106,14 @@ class BookingController extends Controller
     public function complete(Request $request)
     {
         $customer = Customer::find($request->customer_id);
-        if ($request->hasFile('proof')) {
-            $reservation = Reservation::where('customer_id',$request->customer_id)->get();
-            foreach ($reservation as $r) {
+        $reservation = Reservation::where('customer_id',$request->customer_id)->get();
+        foreach ($reservation as $r) {
+            if ($request->hasFile('proof')) {
                 $request->file('proof')->move('images/',$request->file('proof')->getClientOriginalName());
                 $r->bukti_transfer = $request->file('proof')->getClientOriginalName();
                 $r->save();
             }
+            $r->biaya = $request->cost;
         }
         $passenger = Passenger::where('customer_id',$customer->id)->get();
         foreach ($passenger as $r) {

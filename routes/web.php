@@ -57,4 +57,10 @@ Route::group(['middleware'=>['auth','checkLevel:1']],function(){
 	Route::get('/admin/reservation','AdminController@reservation');
 	Route::get('/admin/reservation/approve/{id}','AdminController@approvereservation');
 	Route::get('/admin/reservation/unapprove/{id}','AdminController@unapprovereservation');
+	Route::get('/admin/plane','AdminController@plane');
+	Route::get('/admin/plane/create','AdminController@createplane');
+	Route::post('/admin/plane/postcreate','AdminController@postcreateplane');
+	Route::get('/admin/plane/edit/{id}','AdminController@editplane');
+	Route::post('/admin/plane/update','AdminController@updateplane');
+	Route::get('/admin/plane/delete/{id}','AdminController@deleteplane');
 });

@@ -7,6 +7,7 @@ use \App\User;
 use \App\Rute;
 use \App\Customer;
 use \App\Reservation;
+use \App\Plane;
 
 class AdminController extends Controller
 {
@@ -174,5 +175,52 @@ class AdminController extends Controller
     	$reservation->save();
 
     	return redirect('/admin/reservation');
+    }
+
+    public function plane()
+    {
+    	$plane = Plane::all();
+    	return view('admin.plane',['active'=>'plane','plane'=>$plane]);
+    }
+
+    public function createplane()
+    {
+    	return view('admin.plane_form',['active'=>'plane','action'=>'create']);
+    }
+
+    public function postcreateplane(Request $request)
+    {
+    	$plane = new PLane;
+    	$plane->nama = $request->nama;
+    	$plane->kode = $request->kode;
+    	$plane->seat = $request->seat;
+    	$plane->save();
+
+    	return redirect('/admin/plane');
+    }
+
+    public function editplane($id)
+    {
+    	$plane = Plane::find($id);
+    	return view('admin.plane_form',['active'=>'plane','plane'=>$plane,'action'=>'edit']);
+    }
+
+    public function updateplane(Request $request)
+    {
+    	$plane = Plane::find($request->plane_id);
+    	$plane->nama = $request->nama;
+    	$plane->kode = $request->kode;
+    	$plane->seat = $request->seat;
+    	$plane->save();
+
+    	return redirect('/admin/plane');
+    }
+
+    public function deleteplane($id)
+    {
+    	$plane = Plane::find($id);
+    	$plane->delete();
+
+    	return redirect('/admin/plane');
     }
 }

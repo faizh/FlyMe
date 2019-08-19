@@ -170,6 +170,7 @@
 															<input type="file" name="proof">
 															<input type="hidden" name="customer_id" value="{{$customer_id}}">
 															<input type="hidden" name="rute_id" value="{{$data->id}}">
+															<input type="hidden" name="cost" value="{{total_price}}">
 													</span>
 												</li>
 												<li class="d-flex justify-content-between align-items-center">

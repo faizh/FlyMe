@@ -7,7 +7,7 @@
           <img src="{{asset('admin_lte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{auth()->user()->name}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -43,6 +43,16 @@
         @endif
           <a href="/admin/user">
             <i class="fa fa-user"></i> <span>User</span>
+          </a>
+        </li>
+
+        @if($active=="plane")
+          <li class="active treeview">
+        @else
+          <li class="treeview">
+        @endif
+          <a href="/admin/plane">
+            <i class="fa fa-plane"></i> <span>Plane</span>
           </a>
         </li>
 
