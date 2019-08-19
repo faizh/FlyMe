@@ -31,7 +31,7 @@
         @else
           <li class="treeview">
         @endif
-          <a href="#">
+          <a href="/admin">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -51,7 +51,7 @@
         @else
           <li class="treeview">
         @endif
-          <a href="#">
+          <a href="/admin/rute">
             <i class="fa fa-exchange"></i> <span>Rute</span>
           </a>
         </li>
@@ -61,7 +61,7 @@
         @else
           <li class="treeview">
         @endif
-          <a href="#">
+          <a href="/admin/customer">
             <i class="fa fa-user"></i> <span>Customer</span>
           </a>
         </li>
@@ -71,7 +71,7 @@
         @else
           <li class="treeview">
         @endif
-          <a href="#">
+          <a href="/admin/reservation">
             <i class="fa fa-book"></i> <span>Reservation</span>
           </a>
         </li>

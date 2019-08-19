@@ -40,3 +40,8 @@ Route::get('/admin/user','AdminController@user');
 Route::get('/admin/user/edit/{id}','AdminController@edit');
 Route::post('/admin/user/update','AdminController@update');
 Route::get('/admin/user/delete/{id}','AdminController@delete');
+Route::get('/admin/rute','AdminController@rute');
+Route::get('/admin/rute/create','AdminController@createrute');
+Route::post('/admin/rute/postcreate','AdminController@postcreaterute');
+Route::get('/admin/rute/edit/{id}','AdminController@editrute');
+Route::post('/admin/rute/update','AdminController@updaterute');
