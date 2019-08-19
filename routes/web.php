@@ -26,7 +26,7 @@ Route::get('/logout','AuthController@logout');
 
 Route::post('/booking/search','BookingController@search');
 
-Route::group(['middleware'=>['auth','checkLevel:1']],function(){
+Route::group(['middleware'=>['auth','checkLevel:0,1']],function(){
 	Route::post('/booking/choose','BookingController@choose');
 	Route::post('/booking/passenger','BookingController@passenger');
 	Route::post('/booking/seat','BookingController@seat');

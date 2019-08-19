@@ -21,7 +21,7 @@ class BookingController extends Controller
     public function choose(Request $request)
     {
     	// if(Auth::check()){
-     //        $data = Rute::find($request->rute_id);
+            $data = Rute::find($request->rute_id);
             return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
     	// }
     	// return redirect('/login')->with('error','Login First');
@@ -85,9 +85,11 @@ class BookingController extends Controller
             $passenger->save();
         }
 
+
         $reservation = new Reservation;
         $reservation->user_id = Auth::user()->id;
         $reservation->customer_id = $request->customer_id;
+        $reservation->rute_id = $passenger->rute_id;
         $reservation->reservation_code = "FlyMe-".str_random('5');
         $reservation->save();
 
@@ -103,9 +105,14 @@ class BookingController extends Controller
     public function complete(Request $request)
     {
         $customer = Customer::find($request->customer_id);
-        $request->file('proof')->move('images/',$request->file('proof')->getClientOriginalName());
-        $customer->bukti_transfer = $request->file('proof')->getClientOriginalName();
-        $customer->save();
+        if ($request->hasFile('proof')) {
+            $reservation = Reservation::where('customer_id',$request->customer_id)->get();
+            foreach ($reservation as $r) {
+                $request->file('proof')->move('images/',$request->file('proof')->getClientOriginalName());
+                $r->bukti_transfer = $request->file('proof')->getClientOriginalName();
+                $r->save();
+            }
+        }
         $passenger = Passenger::where('customer_id',$customer->id)->get();
         foreach ($passenger as $r) {
             $data_rute = Rute::where('id',$r->rute_id)->get()->first();
@@ -118,7 +125,7 @@ class BookingController extends Controller
     {
         $user_id = Auth::user()->id;
         $data = Reservation::where('user_id',$user_id)->get();
-        return view('booking.yourbooking',['active'=>'yourbooking','data'=>$data]);
+        return view('booking.yourbooking',['active'=>'yourbooking','reservation'=>$data]);
     }
 
     public function check(Request $request)

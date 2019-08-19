@@ -31,29 +31,28 @@
 												<th>Reservation Date</th>
 												<th>Route</th>
 												<th>Status</th>
-												<th>Action</th>
 											</tr>
 										</thead>
 										@php
 										$i=0;
 										@endphp
-										@foreach($data as $d)
+										@foreach($reservation as $r)
 										@php
 										$i++;
 										@endphp
 										<tr>
 											<td>{{$i}}</td>
-											<td>{{$d->reservation_code}}</td>
-											<td>{{$d->created_at}}</td>
-											<td>{{$d->rute($d->rute_id)}}</td>
-											@if($d->status=="0")
+											<td>{{$r->reservation_code}}</td>
+											<td>{{$r->created_at}}</td>
+											<td>{{$r->rute($r->rute_id)}}</td>
+											@if($r->status=="0")
 												<td><span class="genric-btn danger radius">UNPAID</span></td>
-											@elseif($d->status=="1")
+											@elseif($r->status=="1")
 												<td><span class="genric-btn success radius">PAID</span></td>
 											@endif
 											<form action="/bookinginfo" method="POST">
 												{{csrf_field()}}
-												<input type="hidden" name="reservation_id" value="{{$d->id}}">
+												<input type="hidden" name="reservation_id" value="{{$r->id}}">
 												<td><button type="submit" class="genric-btn info radius">Check</button></td>
 											</form>
 										</tr>

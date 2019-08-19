@@ -32,11 +32,11 @@
 											<span>{{$data->tanggal}}</span>
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
-											<span>Departure</span>
+											<span>Departure At</span>
 											<span>{{$data->berangkat}}</span>
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
-											<span>Arrival</span>
+											<span>Arrival At</span>
 											<span>{{$data->tiba}}</span>
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
