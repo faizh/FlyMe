@@ -34,9 +34,9 @@
                   <th>Arrival</th>
                   <th>Departure At</th>
                   <th>Arrival At</th>
-                  <th>Airplane</th>
                   <th>Date</th>
-                  <th>Seat Quantity</th>
+                  <th>Airplane</th>
+                  <th>Seat Available</th>
                   <th>Price</th>
                 </tr>
                 </thead>
@@ -54,9 +54,9 @@
                   <td>{{$r->tujuan}}</td>
                   <td>{{$r->berangkat}}</td>
                   <td>{{$r->tiba}}</td>
-                  <td>{{$r->maskapai}}</td>
                   <td>{{$r->tanggal}}</td>
-                  <td>{{$r->sisa_seat}}</td>
+                  <td>{{$r->plane($r->id_plane)}}</td>
+                  <td>{{$r->seat($r->id_plane)}}</td>
                   <td style="text-align: right;">{{$r->harga}}</td>
                   <td><a href="/admin/rute/edit/{{$r->id}}">Edit</a> | <a href="/admin/rute/delete/{{$r->id}}">Delete</a></td>
                 </tr>

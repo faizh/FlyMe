@@ -50,16 +50,16 @@
                   <input type="time" class="form-control" placeholder="Enter ..." name="tiba">
                 </div>
                 <div class="form-group">
-                  <label>Airplane</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." name="maskapai">
-                </div>
-                <div class="form-group">
                   <label>Date</label>
                   <input type="date" class="form-control" placeholder="Enter ..." name="tanggal">
                 </div>
                 <div class="form-group">
-                  <label>Seat Quantity</label>
-                  <input type="number" class="form-control" placeholder="Enter ..." name="seat">
+                  <label>Airplane</label>
+                  <select name="maskapai" class="form-control">
+                    @foreach($plane as $p)
+                    <option value="{{$p->id}}">{{$p->nama}}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Price</label>
@@ -93,16 +93,17 @@
                   <input type="time" class="form-control" placeholder="Enter ..." name="tiba" value="{{$rute->tiba}}">
                 </div>
                 <div class="form-group">
-                  <label>Airplane</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." name="maskapai" value="{{$rute->maskapai}}">
-                </div>
-                <div class="form-group">
                   <label>Date</label>
+
                   <input type="date" class="form-control" placeholder="Enter ..." name="tanggal" value="{{$rute->tanggal}}">
                 </div>
                 <div class="form-group">
-                  <label>Seat Quantity</label>
-                  <input type="number" class="form-control" placeholder="Enter ..." name="seat" value="{{$rute->sisa_seat}}">
+                  <label>Airplane</label>
+                  <select name="maskapai" class="form-control">
+                    @foreach($plane as $p)
+                          <option value="{{$p->id}}" @if($rute->id_plane==$p->id) selected @endif>{{$p->nama}}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Price</label>

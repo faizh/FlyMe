@@ -70,7 +70,8 @@ class AdminController extends Controller
 
     public function createrute()
     {
-    	return view('admin.rute_form',['active'=>'rute','action'=>'create']);
+    	$plane = Plane::all();
+    	return view('admin.rute_form',['active'=>'rute','action'=>'create','plane'=>$plane]);
     }
 
     public function postcreaterute(Request $request)
@@ -82,8 +83,7 @@ class AdminController extends Controller
     	$rute->berangkat = $request->berangkat;
     	$rute->tiba = $request->tiba;
     	$rute->tanggal = $request->tanggal;
-    	$rute->maskapai = $request->maskapai;
-    	$rute->sisa_seat = $request->seat;
+    	$rute->id_plane = $request->maskapai;
     	$rute->save();
 
     	return redirect('/admin/rute');
@@ -92,7 +92,8 @@ class AdminController extends Controller
     public function editrute($id)
     {
     	$rute = Rute::find($id);
-    	return view('admin.rute_form',['active'=>'rute','action'=>'edit','rute'=>$rute]);
+    	$plane = Plane::all();
+    	return view('admin.rute_form',['active'=>'rute','action'=>'edit','rute'=>$rute,'plane'=>$plane]);
     }
 
     public function updaterute(Request $request)
@@ -104,8 +105,7 @@ class AdminController extends Controller
     	$rute->berangkat = $request->berangkat;
     	$rute->tiba = $request->tiba;
     	$rute->tanggal = $request->tanggal;
-    	$rute->maskapai = $request->maskapai;
-    	$rute->sisa_seat = $request->seat;
+    	$rute->id_plane = $request->maskapai;
     	$rute->save();
 
     	return redirect('/admin/rute');
