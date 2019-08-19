@@ -29,6 +29,7 @@
                 <h5><a href="/admin/rute/create" class="btn btn-primary">+ Create Rute</a></h5>
                 <thead>
                 <tr>
+                  <th>#</th>
                   <th>Departure</th>
                   <th>Arrival</th>
                   <th>Departure At</th>
@@ -40,8 +41,15 @@
                 </tr>
                 </thead>
                 <tbody>
+                @php
+                $i=0;
+                @endphp
                 @foreach($rute as $r)
+                @php
+                $i++;
+                @endphp
                 <tr>
+                  <td>{{$i}}</td>
                   <td>{{$r->asal}}</td>
                   <td>{{$r->tujuan}}</td>
                   <td>{{$r->berangkat}}</td>

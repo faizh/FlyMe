@@ -21,17 +21,17 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">User Data</h3>
+              <h3 class="box-title">Customer Data</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                	<th>#</th>
+                  <th>No</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Created At</th>
+                  <th>Phone</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -39,16 +39,16 @@
                 @php
                 $i=0;
                 @endphp
-                @foreach($user as $u)
+                @foreach($customer as $c)
                 @php
                 $i++;
                 @endphp
                 <tr>
-                	<td>{{$i}}</td>
-                  <td>{{$u->name}}</td>
-                  <td>{{$u->email}}</td>
-                  <td>{{$u->created_at}}</td>
-                  <td><a href="/admin/user/edit/{{$u->id}}">Edit</a> | <a href="/admin/user/delete/{{$u->id}}">Delete</a></td>
+                  <td>{{$i}}</td>
+                  <td>{{$c->nama}}</td>
+                  <td>{{$c->email}}</td>
+                  <td>{{$c->telepon}}</td>
+                  <td><a href="/admin/customer/edit/{{$c->id}}">Edit</a> | <a href="/admin/customer/delete/{{$c->id}}">Delete</a></td>
                 </tr>
                 @endforeach
                 </tbody>

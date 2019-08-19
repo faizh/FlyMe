@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\User;
 use \App\Rute;
+use \App\customer;
 
 class AdminController extends Controller
 {
@@ -19,13 +20,13 @@ class AdminController extends Controller
     	return view('admin.user',['active'=>'user','user'=>$user]);
     }
 
-    public function edit($id)
+    public function edituser($id)
     {
     	$user = User::find($id);
     	return view('admin.edit_user',['active'=>'user','user'=>$user]);
     }
 
-    public function update(Request $request)
+    public function updateuser(Request $request)
     {
     	$user = User::find($request->user_id);
     	$user->name = $request->nama;
@@ -35,7 +36,7 @@ class AdminController extends Controller
     	return redirect('/admin/user');
     } 
 
-    public function delete($id)
+    public function deleteuser($id)
     {
     	$user= User::find($id);
     	$user->delete();
@@ -89,5 +90,46 @@ class AdminController extends Controller
     	$rute->save();
 
     	return redirect('/admin/rute');
+    }
+
+    public function deleterute($id)
+    {
+    	$rute = Rute::find($id);
+    	$rute->delete();
+
+    	return redirect('/admin/rute');
+    }
+
+    public function customer()
+    {
+    	$customer = customer::all();
+
+    	return view('admin.customer',['active'=>'customer','customer'=>$customer]);
+    }
+
+    public function editcustomer($id)
+    {
+    	$customer = Customer::find($id);
+
+    	return view('admin.customer_form',['active'=>'customer','customer'=>$customer]);
+    }
+
+    public function updatecustomer(Request $request)
+    {
+    	$customer = Customer::find($request->customer_id);
+    	$customer->nama = $request->nama;
+    	$customer->email = $request->email;
+    	$customer->telepon = $request->telepon;
+    	$customer->save();
+
+    	return redirect('/admin/customer');
+    }
+
+    public function deletecustomer($id)
+    {
+    	$customer = Customer::find($id);
+    	$customer->delete();
+
+    	return redirect('/admin/customer');
     }
 }
