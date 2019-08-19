@@ -50,3 +50,6 @@ Route::get('/admin/customer','AdminController@customer');
 Route::get('/admin/customer/edit/{id}','AdminController@editcustomer');
 Route::post('/admin/customer/update','AdminController@updatecustomer');
 Route::get('/admin/customer/delete/{id}','AdminController@deletecustomer');
+Route::get('/admin/reservation','AdminController@reservation');
+Route::get('/admin/reservation/approve/{id}','AdminController@approvereservation');
+Route::get('/admin/reservation/unapprove/{id}','AdminController@unapprovereservation');

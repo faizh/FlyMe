@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\User;
 use \App\Rute;
-use \App\customer;
+use \App\Customer;
+use \App\Reservation;
 
 class AdminController extends Controller
 {
@@ -131,5 +132,30 @@ class AdminController extends Controller
     	$customer->delete();
 
     	return redirect('/admin/customer');
+    }
+
+    public function reservation()
+    {
+    	$reservation = Reservation::all();
+
+    	return view('admin.reservation',['active'=>'reservation','reservation'=>$reservation]);
+    }
+
+    public function approvereservation($id)
+    {
+    	$reservation = Reservation::find($id);
+    	$reservation->status = "1";
+    	$reservation->save();
+
+    	return redirect('/admin/reservation');
+    }
+
+    public function unapprovereservation($id)
+    {
+    	$reservation = Reservation::find($id);
+    	$reservation->status = "0";
+    	$reservation->save();
+    	
+    	return redirect('/admin/reservation');
     }
 }
