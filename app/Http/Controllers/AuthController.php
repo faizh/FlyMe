@@ -15,9 +15,17 @@ class AuthController extends Controller
     public function postlogin(Request $request)
     {
     	if(Auth::attempt($request->only('email','password'))){
-    		return redirect('/');
+            if (Auth::user()->level=='0') {
+        		return redirect('/');
+            }elseif (Auth::user()->level==1) {
+                return redirect('/admin');
+            }
     	}
-    	return redirect('/login');
+        if (Auth::user()->level=='0') {
+        	return redirect('/login');
+        }elseif (Auth::user()->level==1) {
+            return redirect('/admin/login');   
+        }
     }
 
     public function logout()

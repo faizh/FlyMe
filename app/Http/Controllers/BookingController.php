@@ -20,11 +20,11 @@ class BookingController extends Controller
 
     public function choose(Request $request)
     {
-    	if(Auth::check()){
-            $data = Rute::find($request->rute_id);
+    	// if(Auth::check()){
+     //        $data = Rute::find($request->rute_id);
             return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
-    	}
-    	return redirect('/login')->with('error','Login First');
+    	// }
+    	// return redirect('/login')->with('error','Login First');
     }
 
     public function confirmplane($id,$passenger)
