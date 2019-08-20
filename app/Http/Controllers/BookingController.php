@@ -7,13 +7,11 @@ use \App\Rute;
 use \App\Customer;
 use \App\Passenger;
 use \App\Reservation;
-use Illuminate\Support\Facades\Auth;
+use \App\Plane;
+use Auth;
 
 class BookingController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth:checkLevel');
-    }
     public function search(Request $request)
     {
     	$data = Rute::where('asal','LIKE',$request->departure)->where('tujuan','LIKE',$request->arrival)->where('tanggal','LIKE',$request->date)->get();
@@ -50,6 +48,11 @@ class BookingController extends Controller
 
     public function seat(Request $request)
     {
+        $passenger_for_seat = Passenger::where('rute_id',$request->rute_id)->get();
+        foreach ($passenger_for_seat as $ps) {
+            $booked[] = $ps->no_kursi;
+        }
+        
         $customer = new Customer;
         $customer->user_id = Auth::user()->id;
         $customer->nama = $request->nama;
@@ -74,7 +77,7 @@ class BookingController extends Controller
             
         }
         $data = Rute::find($request->rute_id);
-        return view('booking.seat',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity,'jumlah_seat'=>$forseat,'customer_id'=>$customer->id]);
+        return view('booking.seat',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity,'jumlah_seat'=>$forseat,'customer_id'=>$customer->id,'booked_seat'=>$booked]);
     }
 
     // public function seat($id,$passenger)
@@ -85,15 +88,20 @@ class BookingController extends Controller
 
     public function payment(Request $request)
     {
+        $count_booked=0;
         for ($i=1; $i <=$request->passenger_quantity ; $i++) { 
             $passenger_id = "passenger_id".$i;
             $seat_code = "seat".$i;
             $passenger = Passenger::find($request->$passenger_id);
             $passenger->rute_id=$request->rute_id;
-            $passenger->update(array('no_kursi' => $request->$seat_code));
+            $passenger->no_kursi = $request->$seat_code;
             $passenger->save();
+            $count_booked++;
         }
 
+        $rute_for_seat = Rute::find($passenger->rute_id);
+        $rute_for_seat->sisa_seat = $rute_for_seat->sisa_seat - $count_booked;
+        $rute_for_seat->save();
 
         $reservation = new Reservation;
         $reservation->user_id = Auth::user()->id;

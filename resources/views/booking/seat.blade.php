@@ -54,10 +54,10 @@
 										</table>
 
 										<div class="seat">
-											<?php for ($i = 1; $i <= $data->sisa_seat; $i++) : ?>
+											<?php for ($i = 1; $i <= $data->seat($data->id_plane); $i++) : ?>
 
-											<?php if ($data->sisa_seat !== 0) : ?>
-												<?php if (in_array($i, [1,2])) : ?>
+											<?php if ($booked_seat !== 0) : ?>
+												<?php if (in_array($i, $booked_seat)) : ?>
 											<div id="<?php echo $i ?>" class="seat-id seat-notavailabe">
 												<p><?php echo $i ?></p>
 											</div>

@@ -13,6 +13,10 @@ class UserController extends Controller
 
     public function postsignup(Request $request)
     {
+        $this->validate($request,[
+            'email' => 'required|email|unique:users',
+        ]);
+
         if ($request->password!=$request->retype_password) {
             return redirect('/signup')->with(['data'=>$request->all(),'error'=>'Password Not Match']);
         }
@@ -24,6 +28,6 @@ class UserController extends Controller
         $user->level = "0";
     	$user->save();
 
-    	return redirect('/login');
+    	return redirect('/login')->with('sukses','User Have Been Created');
     }
 }

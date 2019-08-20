@@ -20,10 +20,16 @@
 								<form class="form-wrap" action="/postsignup" method="POST" name="signup">
 									{{csrf_field()}}
 									<h3 style="margin-bottom: 20px">Sign Up Here</h3>
-									<input type="text" name="name" placeholder="Name" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name '">
-									<input type="email" min="1" max="20" class="form-control" name="email" placeholder="Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email '">
-									<input type="password" min="1" max="20" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">
-									<input type="password" min="1" max="20" class="form-control" name="retype_password" placeholder="Retype Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password '">
+									<input type="text" name="name" placeholder="Name" class="form-control {{$errors->has('nama') ? 'has-error' : ''}}" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name '" required="">
+									@if($errors->has('nama'))
+								    	<span class="help-block">{{$errors->first('nama')}}</span>
+								    @endif
+									@if($errors->has('email'))
+								    	<span class="help-block" style="color: red">{{$errors->first('email')}}</span>
+								    @endif
+									<input type="email" min="1" max="20" class="form-control {{$errors->has('email') ? 'has-error' : ''}}" name="email" placeholder="Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email '" required="">
+									<input type="password" min="1" max="20" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '" required="">
+									<input type="password" min="1" max="20" class="form-control" name="retype_password" placeholder="Retype Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password '" required="">
 									<button type="submit" class="primary-btnlogin text-uppercase" style="margin-top: 10px">Sign Up</button>
 									<br></br>
 								</form>

@@ -81,6 +81,7 @@ class AdminController extends Controller
 
     public function postcreaterute(Request $request)
     {
+    	$plane_seat = Plane::find($request->maskapai);
     	$rute = new Rute;
     	$rute->asal = $request->asal;
     	$rute->tujuan = $request->tujuan;
@@ -89,6 +90,7 @@ class AdminController extends Controller
     	$rute->tiba = $request->tiba;
     	$rute->tanggal = $request->tanggal;
     	$rute->id_plane = $request->maskapai;
+    	$rute->sisa_seat = $plane_seat->seat;
     	$rute->save();
 
     	return redirect('/admin/rute');

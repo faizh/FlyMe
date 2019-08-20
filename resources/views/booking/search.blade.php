@@ -24,7 +24,7 @@
 						<div class="col-lg-4">
 							<div class="single-destinations">
 								<div class="details">
-									<h4>{{$d->maskapai}}</h4>
+									<h4>{{$d->plane($d->id_plane)}}</h4>
 									<ul class="package-list">
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Date</span>

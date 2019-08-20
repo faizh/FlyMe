@@ -56,7 +56,7 @@
                   <td>{{$r->tiba}}</td>
                   <td>{{$r->tanggal}}</td>
                   <td>{{$r->plane($r->id_plane)}}</td>
-                  <td>{{$r->seat($r->id_plane)}}</td>
+                  <td>{{$r->sisa_seat}}</td>
                   <td style="text-align: right;">{{$r->harga}}</td>
                   <td><a href="/admin/rute/edit/{{$r->id}}">Edit</a> | <a href="/admin/rute/delete/{{$r->id}}">Delete</a></td>
                 </tr>
