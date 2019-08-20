@@ -17,12 +17,13 @@
 						<div class="col-lg-5 col-md-6 banner-right">
 							<div class="tab-content" id="myTabContent">
 							  <div class="tab-pane fade show active" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-								<form class="form-wrap" action="/postsignup" method="POST" >
+								<form class="form-wrap" action="/postsignup" method="POST" name="signup">
 									{{csrf_field()}}
 									<h3 style="margin-bottom: 20px">Sign Up Here</h3>
 									<input type="text" name="name" placeholder="Name" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name '">
 									<input type="email" min="1" max="20" class="form-control" name="email" placeholder="Email " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email '">
-									<input type="text" min="1" max="20" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">
+									<input type="password" min="1" max="20" class="form-control" name="password" placeholder="Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password '">
+									<input type="password" min="1" max="20" class="form-control" name="retype_password" placeholder="Retype Password " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password '">
 									<button type="submit" class="primary-btnlogin text-uppercase" style="margin-top: 10px">Sign Up</button>
 									<br></br>
 								</form>
@@ -33,5 +34,25 @@
 				</div>					
 			</section>
 			<!-- End banner Area -->
+<!-- 			<script>
+				function checkNames() {
+			    // Find the validation image div
+			    var validationElement = document.getElementById('nameValidation');
+			    // Get the form values
+			    var password = document.forms["signup"]["password"].value;
+			    var retype_password = document.forms["signup"]["retype_password"].value;
+			    // Reset the validation element styles
+			    validationElement.style.display = 'none';
+			    validationElement.className = 'validation-image';
+			    // Check if name2 isn't null or undefined or empty
+			    if (retype_password) {
+			        // Show the validation element
+			        validationElement.style.display = 'inline-block';
+			        // Choose which class to add to the element
+			        validationElement.className += 
+			            (password == retype_password ? ' validation-success' : ' validation-error');
+			    }
+			}
+			</script> -->
 
 @stop

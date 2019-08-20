@@ -13,7 +13,12 @@ class AdminController extends Controller
 {
     public function index()
     {
-    	return view('admin.index',['active'=>'dashboard']);
+    	$user = User::count();
+    	$rute = Rute::count();
+    	$customer = Customer::count();
+		$reservation = Reservation::count();
+		$plane = Plane::count();
+    	return view('admin.index',['active'=>'dashboard','user'=>$user,'rute'=>$rute,'customer'=>$customer,'reservation'=>$reservation,'plane'=>$plane]);
     }
 
     public function user()

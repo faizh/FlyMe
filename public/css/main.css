@@ -4548,3 +4548,16 @@ body.mobile-nav-active #mobile-nav-toggle {
 .footer-text a, .footer-text i {
   color: #f8b600;
 }
+
+.validation-image {
+    display: none;
+}
+/* Error styling */
+.validation-error {
+    color: #ff0000;
+}
+
+/* Success styling */
+.validation-success {
+    color: #00ff00;
+}

@@ -7,10 +7,13 @@ use \App\Rute;
 use \App\Customer;
 use \App\Passenger;
 use \App\Reservation;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth:checkLevel');
+    }
     public function search(Request $request)
     {
     	$data = Rute::where('asal','LIKE',$request->departure)->where('tujuan','LIKE',$request->arrival)->where('tanggal','LIKE',$request->date)->get();
@@ -29,14 +32,20 @@ class BookingController extends Controller
 
     public function confirmplane($id,$passenger)
     {
-        $data = Rute::find($id);
-        return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
+        if(Auth::check()){
+            $data = Rute::find($id);
+            return view('booking.confirmplane',['active'=>'home','data'=>$data,'passenger'=>$passenger]);
+        }
+        return redirect('/login')->with('error','Login First');
     }
 
     public function passenger(Request $request)
     {
-        $data = Rute::find($request->rute_id);
-        return view('booking.passenger',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
+        if(Auth::check()){
+            $data = Rute::find($request->rute_id);
+            return view('booking.passenger',['active'=>'home','data'=>$data,'passenger_quantity'=>$request->passenger_quantity]);
+        }
+        return redirect('/login')->with('error','Login First');
     }
 
     public function seat(Request $request)

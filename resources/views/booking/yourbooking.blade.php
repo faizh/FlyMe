@@ -31,6 +31,7 @@
 												<th>Reservation Date</th>
 												<th>Route</th>
 												<th>Status</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										@php

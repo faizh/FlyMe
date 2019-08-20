@@ -13,6 +13,9 @@ class UserController extends Controller
 
     public function postsignup(Request $request)
     {
+        if ($request->password!=$request->retype_password) {
+            return redirect('/signup')->with(['data'=>$request->all(),'error'=>'Password Not Match']);
+        }
     	$user = new \App\User;
     	$user->name = $request->name;
     	$user->email = $request->email;
