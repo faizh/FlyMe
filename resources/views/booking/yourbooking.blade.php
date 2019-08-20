@@ -49,7 +49,11 @@
 											@if($r->status=="0")
 												<td><span class="genric-btn danger radius">UNPAID</span></td>
 											@elseif($r->status=="1")
-												<td><span class="genric-btn success radius">PAID</span></td>
+											<form action="/boardingpass" method="POST">
+												{{csrf_field()}}
+												<input type="hidden" name="reservation_id" value="{{$r->id}}">
+												<td><button type="submit" class="genric-btn success radius">GET BOARDING PASS</button></td>
+											</form>
 											@endif
 											<form action="/bookinginfo" method="POST">
 												{{csrf_field()}}

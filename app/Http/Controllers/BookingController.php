@@ -9,6 +9,7 @@ use \App\Passenger;
 use \App\Reservation;
 use \App\Plane;
 use Auth;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -155,4 +156,18 @@ class BookingController extends Controller
         $passenger = Passenger::where('customer_id',$customer->id)->get();
         return view('booking.payment',['active'=>'yourbooking','data'=>$data_rute,'passenger'=>$passenger,'customer_id'=>$customer->id,'reservation_data'=>$reservation]);
     }
+
+    public function boardingpass(Request $request)
+    {
+        $reservation = Reservation::find($request->reservation_id);
+        $rute = Rute::where('id',$reservation->rute_id)->get()->first();
+        $plane = Plane::find($rute->id_plane);
+        $passenger = Passenger::where('customer_id',$reservation->customer_id)->get();
+
+        // $pdf = PDF::loadView('booking.boardingpass',['active'=>'yourbooking','reservation'=>$reservation,'rute'=>$rute,'passenger'=>$passenger,'plane'=>$plane]);
+        // return $pdf->download('BoardingPass.pdf');
+        return view('booking.boardingpass',['active'=>'yourbooking','reservation'=>$reservation,'rute'=>$rute,'passenger'=>$passenger,'plane'=>$plane]);
+    }
+
+
 }

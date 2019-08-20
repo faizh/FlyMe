@@ -34,6 +34,7 @@ Route::group(['middleware'=>['auth','checkLevel:0,1']],function(){
 	Route::post('/booking/complete','BookingController@complete');
 	Route::get('/yourbooking','BookingController@yourbooking');
 	Route::post('/bookinginfo','BookingController@check');
+	Route::post('/boardingpass','BookingController@boardingpass');
 });
 
 Route::group(['middleware'=>['auth','checkLevel:1']],function(){

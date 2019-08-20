@@ -8068,3 +8068,45 @@ a.text-dark:hover, a.text-dark:focus {
 .invisible {
   visibility: hidden !important;
 }
+
+.table-boarding {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 20px;
+}
+
+.table-boarding th,
+.table-boarding td {
+  vertical-align: top;
+}
+
+.table-boarding thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table-boarding tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.card_divider {
+  position: relative;
+  width: 100%;
+}
+
+.card_divider .divider {
+  width: 100%;
+  margin: auto;
+  height: 2px;
+  background: linear-gradient(to right, #000 50%, transparent 50%);
+  background-size: 10px 8px, 100% 2px;
+  opacity: .2;
+}
+
+.vl {
+  border-left: 3px solid grey;
+  height: 85%;
+  position: absolute;
+  left: 72%;
+  top: 1;
+}

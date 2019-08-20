@@ -54,6 +54,9 @@
 										</table>
 
 										<div class="seat">
+											@php
+											$x=4;
+											@endphp
 											<?php for ($i = 1; $i <= $data->seat($data->id_plane); $i++) : ?>
 
 											<?php if ($booked_seat !== 0) : ?>
@@ -62,16 +65,27 @@
 												<p><?php echo $i ?></p>
 											</div>
 
+												<?php elseif ($i==$x) : ?>
+													@php
+													$x+=8;
+													@endphp
+													<div onclick="sget(this.id)" id="<?php echo $i ?>" class="seat-id">
+														<p><?php echo $i ?></p>
+													</div>
+													<div class="way">
+														<p></p>
+													</div>		
 												<?php else : ?>
 											<div onclick="sget(this.id)" id="<?php echo $i ?>" class="seat-id">
 												<p><?php echo $i ?></p>
 											</div>
 												<?php endif; ?>
 											<?php else : ?>
-											<div onclick="sget(this.id)" id="<?php echo $i ?>" class="seat-id">
-												<p><?php echo $i ?></p>
-											</div>
+												<div onclick="sget(this.id)" id="<?php echo $i ?>" class="seat-id">
+													<p><?php echo $i ?></p>
+												</div>
 											<?php endif; ?>
+
 											<?php endfor; ?>
 										</div>
 										<div class="row" style="margin-top: 30px;">	
